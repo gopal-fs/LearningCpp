@@ -135,4 +135,4 @@ This project is released under the MIT License. See LICENSE for details.
 
 # ✉️ Contact
 
-If you want feedback or help with code, open an issue or reach me at: gopalpinapathuni.@gmafsil.com (optional — add preferred contact)
+If you want feedback or help with code, open an issue or reach me at: gopalpinapathuni.@gmafsil.com 

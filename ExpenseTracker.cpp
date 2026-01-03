@@ -24,7 +24,7 @@ int main() {
             cin >> category;
             out << amount << " " << category << endl;
             out.close();
-            cout << "Expense Added ✅\n";
+            cout << "Expense Added \n";
         }
 
         else if (choice == 2) {

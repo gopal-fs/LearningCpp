@@ -69,5 +69,5 @@ int main() {
 	doub.show();
 	
 	
-
+    doub.show();
 }

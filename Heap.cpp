@@ -3,9 +3,11 @@ using namespace std;
 
 
 class minHeap{
-    vector<int> &nums;
+    vector<int> nums;
     public:
-        minHeap(vector<int> &nums):nums(nums){}
+        minHeap(){
+            this->nums={};
+        }
     
         void showNums(){
             for(int i=0;i<nums.size();i++) cout<<nums[i]<<" ";
@@ -28,7 +30,7 @@ class minHeap{
             nums.push_back(val);
             int i=nums.size()-1;
             while(i!=0){
-                int parent=(i-1)/2;
+                int parent=getParentIndex(i);
                 if(nums[parent]>nums[i]){
                     swap(nums[i],nums[parent]);
                     i=parent;
@@ -36,20 +38,53 @@ class minHeap{
                 else return;
             }
         }
+        
+        int deleteElement(){
+            if(nums.size()<1) return -1;
+            int val=nums[0];
+            swap(nums[0],nums[nums.size()-1]);
+            nums.pop_back();
+            
+            int i=0;
+            while(i<nums.size()){
+                int left=getLeftChildIndex(i);
+                int right=getRightChildIndex(i);
+                int smallest=i;
+                if(left<nums.size() && nums[left]<nums[smallest]) smallest=left;
+                if(right<nums.size() && nums[right]<nums[smallest]) smallest=right;
+                
+                if(smallest!=i){
+                    swap(nums[i],nums[smallest]);
+                    i=smallest;
+                }
+                else return val;
+                
+            }
+            return val;
+        }
+        int peek(){
+            if(nums.size()<1) return 0;
+            return nums[0];
+        }
     
 };
 
 
 int main() {
 	
-	vector<int> arr={5,10,20,30};
-	minHeap heap(arr);
-	heap.showNums();
+	minHeap heap;
+	heap.insert(5);
+	heap.insert(20);
+	heap.insert(4);
+	heap.insert(10);
 	heap.insert(1);
-	heap.showNums();
 	heap.insert(0);
 	heap.showNums();
-	for(int i=0;i<arr.size();i++) cout<<arr[i]<<" ";
+    cout<<heap.peek()<<endl;
+	cout<<heap.deleteElement()<<endl;
+	cout<<heap.deleteElement()<<endl;
+	heap.insert(7);
+	heap.showNums();
 	
 	
 	

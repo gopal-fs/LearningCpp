@@ -25,7 +25,7 @@ void topologicalSort(int v,unordered_map<int,vector<int>> &map){
     }
     
     
-    O(N+E)
+    //O(N+E)
     while(!q.empty()){
         int curr=q.front(); q.pop();
         res.push_back(curr);

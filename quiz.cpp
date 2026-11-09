@@ -1,50 +1,109 @@
+
 #include <iostream>
-#include<ctime>
+#include <vector>
+#include <string>
 using namespace std;
 
+struct Question {
+    string question;
+    vector<string> options;
+    char answer;
+};
+
 int main() {
-    
-    string questions[]={"What Year C++ Created?","Who Invented C++","what is the predecessor of c++","is the earth flat?"};
-    string options[][4]={
-        {"A. 1969","B. 1975","C. 1985","D. 1989"},
-        {"A. Guido Van Rossum","B. Bjarne stroustrup","C. John","D. Marck Zuckerburg"},
-        {"A. C", "B. C+","C. C--","D. B++"},
-        {"A. yes","B. no","C. sometimes","D. None of the above"}
+
+    vector<Question> quiz = {
+        {
+            "Which language is used for DSA?",
+            {"Python", "C++", "HTML", "CSS"},
+            'B'
+        },
+        {
+            "What is the time complexity of Binary Search?",
+            {"O(N)", "O(N^2)", "O(log N)", "O(1)"},
+            'C'
+        },
+        {
+            "Which data structure follows FIFO?",
+            {"Stack", "Queue", "Tree", "Graph"},
+            'B'
+        },
+        {
+            "Which keyword is used for inheritance in C++?",
+            {"extends", "implements", "public", "class"},
+            'C'
+        },
+        {
+            "Which algorithm finds the shortest path in an unweighted graph?",
+            {"DFS", "BFS", "Merge Sort", "Quick Sort"},
+            'B'
+        }
     };
-    char answerKey[]={'C','B','A','B'};
-    int score=0;
 
-    int questionsSize=sizeof(questions)/sizeof(string);
-    for(int i=0;i<questionsSize;i++){
-        cout<<"************************"<<endl;
-        cout<<questions[i]<<endl;
-        cout<<"************************"<<endl;
-         cout<<"Options:"<<endl;
-        for(int j=0;j<sizeof(options[i])/sizeof(options[i][0]);j++){
-           
-            cout<<options[i][j]<<endl;
-            
+    int score = 0;
+    int total = quiz.size();
 
+    cout << "================================\n";
+    cout << "       C++ QUIZ CHALLENGE       \n";
+    cout << "================================\n";
 
-            
+    for (int i = 0; i < total; i++) {
+
+        cout << "\nQuestion " << i + 1 << ": ";
+        cout << quiz[i].question << "\n";
+
+        for (int j = 0; j < 4; j++) {
+            cout << char('A' + j) << ". "
+                 << quiz[i].options[j] << "\n";
         }
-        char userChoice;
-        do{
-            cout<<"Please Choose One of the following[A,B,C,D]:";
-            cin>>userChoice;
-        }while (userChoice !='A' && userChoice !='B' && userChoice !='C' && userChoice !='D');
 
-        if(answerKey[i]==userChoice){
-            cout<<"Correct Answer!"<<endl;
-            score++;
+        char choice;
+
+        while (true) {
+            cout << "\nYour answer: ";
+            cin >> choice;
+
+            choice = toupper(choice);
+
+            if (choice >= 'A' && choice <= 'D') {
+                break;
+            }
+
+            cout << "Invalid option! Choose A, B, C or D.\n";
         }
-        else{
-            cout<<"Incorrect Answer!"<<endl;
-            score--;
+
+        if (choice == quiz[i].answer) {
+            cout << "Correct answer! +10 points\n";
+            score += 10;
         }
+        else {
+            cout << "Wrong answer!\n";
+            cout << "Correct answer: "
+                 << quiz[i].answer << "\n";
+        }
+
+        cout << "------------------------------\n";
     }
 
-    cout<<"*************************************"<<endl;
-    cout<<"Hurray You Completed the Quiz! Score: "<<score;
+    double percentage = (score * 100.0) / (total * 10);
+
+    cout << "\n========== QUIZ RESULT ==========\n";
+    cout << "Total Questions: " << total << "\n";
+    cout << "Correct Score: " << score << "/"
+         << total * 10 << "\n";
+    cout << "Percentage: " << percentage << "%\n";
+
+    if (percentage >= 80) {
+        cout << "Excellent performance!\n";
+    }
+    else if (percentage >= 50) {
+        cout << "Good job! Keep practicing.\n";
+    }
+    else {
+        cout << "Keep learning and try again!\n";
+    }
+
+    cout << "================================\n";
+
     return 0;
 }
